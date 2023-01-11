@@ -34,7 +34,7 @@ Current build status
               <td>linux_64</td>
               <td>
                 <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=17726&branchName=main">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/hdbpp-es-feedstock?branchName=main&jobName=linux&configuration=linux_64_" alt="variant">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/hdbpp-es-feedstock?branchName=main&jobName=linux&configuration=linux%20linux_64_" alt="variant">
                 </a>
               </td>
             </tr>
@@ -51,6 +51,7 @@ Current release info
 | Name | Downloads | Version | Platforms |
 | --- | --- | --- | --- |
 | [![Conda Recipe](https://img.shields.io/badge/recipe-hdbpp--es-green.svg)](https://anaconda.org/conda-forge/hdbpp-es) | [![Conda Downloads](https://img.shields.io/conda/dn/conda-forge/hdbpp-es.svg)](https://anaconda.org/conda-forge/hdbpp-es) | [![Conda Version](https://img.shields.io/conda/vn/conda-forge/hdbpp-es.svg)](https://anaconda.org/conda-forge/hdbpp-es) | [![Conda Platforms](https://img.shields.io/conda/pn/conda-forge/hdbpp-es.svg)](https://anaconda.org/conda-forge/hdbpp-es) |
+| [![Conda Recipe](https://img.shields.io/badge/recipe-hdbpp--es--dbg-green.svg)](https://anaconda.org/conda-forge/hdbpp-es-dbg) | [![Conda Downloads](https://img.shields.io/conda/dn/conda-forge/hdbpp-es-dbg.svg)](https://anaconda.org/conda-forge/hdbpp-es-dbg) | [![Conda Version](https://img.shields.io/conda/vn/conda-forge/hdbpp-es-dbg.svg)](https://anaconda.org/conda-forge/hdbpp-es-dbg) | [![Conda Platforms](https://img.shields.io/conda/pn/conda-forge/hdbpp-es-dbg.svg)](https://anaconda.org/conda-forge/hdbpp-es-dbg) |
 
 Installing hdbpp-es
 ===================
@@ -62,16 +63,16 @@ conda config --add channels conda-forge
 conda config --set channel_priority strict
 ```
 
-Once the `conda-forge` channel has been enabled, `hdbpp-es` can be installed with `conda`:
+Once the `conda-forge` channel has been enabled, `hdbpp-es, hdbpp-es-dbg` can be installed with `conda`:
 
 ```
-conda install hdbpp-es
+conda install hdbpp-es hdbpp-es-dbg
 ```
 
 or with `mamba`:
 
 ```
-mamba install hdbpp-es
+mamba install hdbpp-es hdbpp-es-dbg
 ```
 
 It is possible to list all of the versions of `hdbpp-es` available on your platform with `conda`:

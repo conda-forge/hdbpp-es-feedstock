@@ -10,8 +10,11 @@ source:
   sha256: 75f5ef639c840c76a098368198184bb06697b2fe232c2c0d5483dfc611e764de
 
 build:
-  number: 0
+  number: 1
   skip: true  # [not linux]
+  # Prevent hdb++es-srv.dbg to be modified
+  binary_relocation:
+    - bin/hdb++es-srv
 
 requirements:
   build:
@@ -30,6 +33,21 @@ requirements:
 test:
   commands:
     - hdb++es-srv --help 2>&1 | grep usage
+
+outputs:
+  - name: hdbpp-es
+    files:
+      - bin/hdb++es-srv
+
+  - name: hdbpp-es-dbg
+    requirements:
+      run:
+        - {{ pin_subpackage('hdbpp-es', exact=True) }}
+    files:
+      - bin/hdb++es-srv.dbg
+    test:
+      commands:
+        - test -f ${PREFIX}/bin/hdb++es-srv.dbg
 
 about:
   home: https://www.tango-controls.org
