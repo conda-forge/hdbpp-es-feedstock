@@ -12,6 +12,9 @@ source:
 build:
   number: 1
   skip: true  # [not linux]
+  # Prevent hdb++es-srv.dbg to be modified
+  binary_relocation:
+    - bin/hdb++es-srv
 
 requirements:
   build:
@@ -30,6 +33,21 @@ requirements:
 test:
   commands:
     - hdb++es-srv --help 2>&1 | grep usage
+
+outputs:
+  - name: hdbpp-es
+    files:
+      - bin/hdb++es-srv
+
+  - name: hdbpp-es-dbg
+    requirements:
+      run:
+        - {{ pin_subpackage('hdbpp-es', exact=True) }}
+    files:
+      - bin/hdb++es-srv.dbg
+    test:
+      commands:
+        - test -f ${PREFIX}/bin/hdb++es-srv.dbg
 
 about:
   home: https://www.tango-controls.org
