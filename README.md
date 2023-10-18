@@ -1,11 +1,11 @@
-About hdbpp-es
-==============
+About hdbpp-es-feedstock
+========================
+
+Feedstock license: [BSD-3-Clause](https://github.com/conda-forge/hdbpp-es-feedstock/blob/main/LICENSE.txt)
 
 Home: https://www.tango-controls.org
 
 Package license: GPL-3.0-or-later
-
-Feedstock license: [BSD-3-Clause](https://github.com/conda-forge/hdbpp-es-feedstock/blob/main/LICENSE.txt)
 
 Summary: Tango device server for the HDB++ Event Subscriber
 
