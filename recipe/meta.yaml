@@ -1,5 +1,5 @@
 {% set name = "hdbpp-es" %}
-{% set version = "2.1.0" %}
+{% set version = "2.2.0" %}
 
 package:
   name: {{ name|lower }}
@@ -7,14 +7,14 @@ package:
 
 source:
   url: https://gitlab.com/tango-controls/hdbpp/hdbpp-es/-/archive/{{ version }}/hdbpp-es-{{ version }}.tar.gz
-  sha256: 75f5ef639c840c76a098368198184bb06697b2fe232c2c0d5483dfc611e764de
+  sha256: 8a9f0b79e0d52f64bcc990a96c2d65a94f8367d535337fe42a85374b8bef7e53
 
 build:
-  number: 1
-  skip: true  # [not linux]
+  number: 0
+  skip: true  # [win]
   # Prevent hdb++es-srv.dbg to be modified
-  binary_relocation:
-    - bin/hdb++es-srv
+  binary_relocation:     # [linux]
+    - bin/hdb++es-srv    # [linux]
 
 requirements:
   build:
@@ -25,8 +25,7 @@ requirements:
     - pkg-config
   host:
     - cppzmq
-    - cpptango <9.4
-    - omniorb
+    - cpptango
     - omniorb-libs
     - libhdbpp >=2.1.0
 
@@ -34,20 +33,20 @@ test:
   commands:
     - hdb++es-srv --help 2>&1 | grep usage
 
-outputs:
-  - name: hdbpp-es
-    files:
-      - bin/hdb++es-srv
+outputs:                                                # [linux]
+  - name: hdbpp-es                                      # [linux]
+    files:                                              # [linux]
+      - bin/hdb++es-srv                                 # [linux]
 
-  - name: hdbpp-es-dbg
-    requirements:
-      run:
-        - {{ pin_subpackage('hdbpp-es', exact=True) }}
-    files:
-      - bin/hdb++es-srv.dbg
-    test:
-      commands:
-        - test -f ${PREFIX}/bin/hdb++es-srv.dbg
+  - name: hdbpp-es-dbg                                  # [linux]
+    requirements:                                       # [linux]
+      run:                                              # [linux]
+        - {{ pin_subpackage('hdbpp-es', exact=True) }}  # [linux]
+    files:                                              # [linux]
+      - bin/hdb++es-srv.dbg                             # [linux]
+    test:                                               # [linux]
+      commands:                                         # [linux]
+        - test -f ${PREFIX}/bin/hdb++es-srv.dbg         # [linux]
 
 about:
   home: https://www.tango-controls.org
