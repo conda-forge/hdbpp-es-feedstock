@@ -10,7 +10,7 @@ source:
   sha256: 8a9f0b79e0d52f64bcc990a96c2d65a94f8367d535337fe42a85374b8bef7e53
 
 build:
-  number: 0
+  number: 1
   skip: true  # [win]
   # Prevent hdb++es-srv.dbg to be modified
   binary_relocation:     # [linux]
@@ -40,6 +40,10 @@ outputs:                                                # [linux]
 
   - name: hdbpp-es-dbg                                  # [linux]
     requirements:                                       # [linux]
+      host:                                             # [linux]
+        # build string must depend on cpptango to have
+        # different versions per cpptango
+        - cpptango                                      # [linux]
       run:                                              # [linux]
         - {{ pin_subpackage('hdbpp-es', exact=True) }}  # [linux]
     files:                                              # [linux]
