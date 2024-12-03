@@ -1,5 +1,5 @@
 {% set name = "hdbpp-es" %}
-{% set version = "2.2.0" %}
+{% set version = "2.2.1" %}
 
 package:
   name: {{ name|lower }}
@@ -7,10 +7,10 @@ package:
 
 source:
   url: https://gitlab.com/tango-controls/hdbpp/hdbpp-es/-/archive/{{ version }}/hdbpp-es-{{ version }}.tar.gz
-  sha256: 8a9f0b79e0d52f64bcc990a96c2d65a94f8367d535337fe42a85374b8bef7e53
+  sha256: eede01e3a0c98a82f68a827578da8ac6030a6de0df84ef1c58d31e4aed76dd71
 
 build:
-  number: 1
+  number: 0
   skip: true  # [win]
   # Prevent hdb++es-srv.dbg to be modified
   binary_relocation:     # [linux]
@@ -21,7 +21,7 @@ requirements:
     - cmake
     - make
     - {{ compiler('cxx') }}
-    - libtool
+    - {{ stdlib('c') }}
     - pkg-config
   host:
     - cppzmq
