@@ -13,7 +13,7 @@ build:
   number: 0
   skip: true  # [win]
   # Prevent hdb++es-srv.dbg to be modified
-  binary_relocation:     # [linux]
+  binary_relocation:   # [linux]
     - bin/hdb++es-srv    # [linux]
 
 requirements:
@@ -21,6 +21,7 @@ requirements:
     - cmake
     - make
     - {{ compiler('cxx') }}
+    - {{ stdlib("c") }}
     - {{ stdlib('c') }}
     - pkg-config
   host:
@@ -33,23 +34,23 @@ test:
   commands:
     - hdb++es-srv --help 2>&1 | grep usage
 
-outputs:                                                # [linux]
-  - name: hdbpp-es                                      # [linux]
-    files:                                              # [linux]
+outputs:   # [linux]
+  - name: hdbpp-es  # [linux]
+    files:   # [linux]
       - bin/hdb++es-srv                                 # [linux]
 
-  - name: hdbpp-es-dbg                                  # [linux]
-    requirements:                                       # [linux]
-      host:                                             # [linux]
+  - name: hdbpp-es-dbg  # [linux]
+    requirements:   # [linux]
+      host:   # [linux]
         # build string must depend on cpptango to have
         # different versions per cpptango
         - cpptango                                      # [linux]
-      run:                                              # [linux]
+      run:   # [linux]
         - {{ pin_subpackage('hdbpp-es', exact=True) }}  # [linux]
-    files:                                              # [linux]
+    files:   # [linux]
       - bin/hdb++es-srv.dbg                             # [linux]
-    test:                                               # [linux]
-      commands:                                         # [linux]
+    test:   # [linux]
+      commands:   # [linux]
         - test -f ${PREFIX}/bin/hdb++es-srv.dbg         # [linux]
 
 about:
