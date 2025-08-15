@@ -10,7 +10,7 @@ source:
   sha256: 84014e5a1188c8e28c04ee743b3a6b92ea06530075628177086ec35482e1effc
 
 build:
-  number: 0
+  number: 1
   skip: true  # [win]
   # Prevent hdb++es-srv.dbg to be modified
   binary_relocation:   # [linux]
