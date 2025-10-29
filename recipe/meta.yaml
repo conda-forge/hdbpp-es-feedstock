@@ -1,5 +1,5 @@
 {% set name = "hdbpp-es" %}
-{% set version = "2.2.2" %}
+{% set version = "2.2.3" %}
 
 package:
   name: {{ name|lower }}
@@ -7,7 +7,7 @@ package:
 
 source:
   url: https://gitlab.com/tango-controls/hdbpp/hdbpp-es/-/archive/{{ version }}/hdbpp-es-{{ version }}.tar.gz
-  sha256: 84014e5a1188c8e28c04ee743b3a6b92ea06530075628177086ec35482e1effc
+  sha256: bf566f45a339b7c364fcac882fd9dcf2d491daa5a17332896063b11718924b1d
 
 build:
   number: 0
