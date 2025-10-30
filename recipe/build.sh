@@ -1,4 +1,5 @@
 cmake ${CMAKE_ARGS} \
+      -DCMAKE_POLICY_VERSION_MINIMUM=3.5 \
       -DCMAKE_BUILD_TYPE=RelWithDebInfo \
       -DLIBHDBPP_BACKEND=libhdbpp \
       -S . -B build
