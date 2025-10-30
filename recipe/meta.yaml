@@ -31,7 +31,7 @@ requirements:
 
 test:
   commands:
-    - hdb++es-srv --help 2>&1 | grep usage
+    - hdb++es-srv --help 2>&1 | grep -i usage
 
 outputs:   # [linux]
   - name: hdbpp-es  # [linux]
