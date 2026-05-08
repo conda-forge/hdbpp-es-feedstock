@@ -1,0 +1,85 @@
+schema_version: 1
+
+context:
+  version: "2.2.4"
+
+recipe:
+  name: hdbpp-es-split
+  version: ${{ version }}
+
+source:
+  url: https://gitlab.com/tango-controls/hdbpp/hdbpp-es/-/archive/${{ version }}/hdbpp-es-${{ version }}.tar.gz
+  sha256: 7e14cd7005480768f6ba6ba4918b9853a2d7697b4cdebed2d6d1afb8fb1bd792
+
+build:
+  number: 1
+  skip:
+    - win
+
+outputs:
+  - staging:
+      name: hdbpp-es-build
+    requirements:
+      build:
+        - cmake
+        - ninja
+        - if: unix
+          then:
+            - pkg-config
+        - ${{ stdlib('c') }}
+        - ${{ compiler('cxx') }}
+      host:
+        - cppzmq
+        - cpptango
+        - omniorb-libs
+        - libhdbpp >=2.1.0
+    build:
+      script:
+        file: build
+
+  - package:
+      name: hdbpp-es
+    inherit: hdbpp-es-build
+    build:
+      files:
+        - if: unix
+          then:
+            - bin/hdb++es-srv
+    tests:
+      - script:
+          - hdb++es-srv --help 2>&1 | grep -i usage
+
+  - package:
+      name: hdbpp-es-dbg
+    inherit:
+      from: hdbpp-es-build
+      run_exports: false
+    build:
+      skip:
+        - not linux
+      dynamic_linking:
+        # Prevent dbg file to be modified
+        # Will raise CRC mismatch otherwise!
+        binary_relocation: false
+      files:
+        - lib/debug/hdb++es-srv.dbg
+    requirements:
+      run:
+        - ${{ pin_subpackage('hdbpp-es', exact=True) }}
+    tests:
+      - package_contents:
+          files:
+            - lib/debug/hdb++es-srv.dbg
+
+about:
+  homepage: https://www.tango-controls.org
+  license: GPL-3.0-or-later
+  license_file: LICENSE
+  summary: Tango device server for the HDB++ Event Subscriber
+  repository: https://gitlab.com/tango-controls/hdbpp/hdbpp-es
+  documentation: https://tango-controls.readthedocs.io/en/latest/Explanation/archiving/hdbpp.html
+
+extra:
+  feedstock-name: hdbpp-es
+  recipe-maintainers:
+    - beenje
